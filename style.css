@@ -1,0 +1,381 @@
+/* Color Variables for Neumorphism / Soft UI Theme */
+:root {
+    --primary-color: #55acee; /* Soft Primary Blue */
+    --secondary-color: #ff6f69; /* Soft Accent Red */
+    --background-color: #f0f2f5; /* Light Soft Background */
+    --card-background: #f0f2f5; /* Same as background for soft effect */
+    --text-color: #3f5163; /* Muted Dark Text */
+    --light-shadow: #ffffff; /* Light Shadow for Neumorphism */
+    --dark-shadow: #d9dee4; /* Dark Shadow for Neumorphism */
+    --transition-speed: 0.4s;
+}
+
+/* Base Styles and Background Animation (Softened) */
+body {
+    font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 30px 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at top left, rgba(85, 172, 238, 0.08), transparent 50%),
+                radial-gradient(circle at bottom right, rgba(255, 111, 105, 0.08), transparent 50%);
+    opacity: 0.8;
+    z-index: -1;
+    animation: background-pan 60s linear infinite alternate;
+}
+
+@keyframes background-pan {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-50%, -50%); }
+}
+
+/* Neumorphism Mixin */
+.neumorphism-shadow {
+    box-shadow: 8px 8px 16px var(--dark-shadow), -8px -8px 16px var(--light-shadow);
+}
+.neumorphism-inset {
+    box-shadow: inset 5px 5px 10px var(--dark-shadow), inset -5px -5px 10px var(--light-shadow);
+}
+
+.container {
+    width: 100%;
+    max-width: 950px;
+    background: var(--card-background);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 20px var(--dark-shadow), -10px -10px 20px var(--light-shadow);
+    z-index: 10;
+}
+
+/* Typography */
+h1 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 2.2em;
+}
+
+h2 {
+    color: var(--text-color);
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 1.5em;
+    padding-left: 10px;
+    border-left: 4px solid var(--secondary-color);
+}
+
+/* 3.1. Student List Styling */
+.list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: inset 3px 3px 6px var(--dark-shadow), inset -3px -3px 6px var(--light-shadow);
+}
+
+.student-item {
+    background: var(--card-background);
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    flex-grow: 1;
+    min-width: 180px;
+    transition: box-shadow var(--transition-speed), transform 0.2s;
+    box-shadow: 3px 3px 6px var(--dark-shadow), -3px -3px 6px var(--light-shadow);
+}
+
+.student-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 10px var(--dark-shadow), -5px -5px 10px var(--light-shadow);
+}
+
+.student-item input[type="checkbox"] {
+    display: none; 
+}
+
+.student-item label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 400;
+    user-select: none;
+}
+
+/* Имитация кастомного чекбокса */
+.student-item label::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    background: var(--background-color);
+    box-shadow: inset 2px 2px 4px var(--dark-shadow), inset -2px -2px 4px var(--light-shadow);
+    transition: background-color var(--transition-speed);
+}
+
+.student-item input[type="checkbox"]:checked + label {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.student-item input[type="checkbox"]:checked + label::before {
+    background-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(85, 172, 238, 0.5);
+    content: '✓';
+    color: white;
+    text-align: center;
+    line-height: 18px;
+    font-size: 14px;
+}
+
+/* Button Styling */
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all var(--transition-speed);
+    width: 100%;
+    margin-top: 25px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: var(--card-background);
+    box-shadow: 6px 6px 12px var(--dark-shadow), -6px -6px 12px var(--light-shadow);
+}
+
+.btn:active {
+    box-shadow: inset 4px 4px 8px var(--dark-shadow), inset -4px -4px 8px var(--light-shadow);
+    transform: scale(0.98);
+}
+
+.primary-btn {
+    color: var(--primary-color);
+}
+
+.primary-btn:hover {
+    color: #448cc7;
+}
+
+.secondary-btn {
+    color: var(--secondary-color);
+}
+
+/* Groups Output Styling */
+.groups-container {
+    display: grid;
+    /* По умолчанию 280px или 1fr (адаптация на ПК) */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.group-card {
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: 15px;
+    transition: all var(--transition-speed);
+    opacity: 0.8;
+    transform: translateY(0);
+    box-shadow: inset 5px 5px 10px var(--dark-shadow), inset -5px -5px 10px var(--light-shadow);
+}
+
+.group-card.group-completed {
+    opacity: 1;
+    box-shadow: 5px 5px 10px var(--dark-shadow), -5px -5px 10px var(--light-shadow);
+}
+
+.group-card h3 {
+    margin-top: 0;
+    color: var(--secondary-color);
+    border-bottom: 1px solid var(--dark-shadow);
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.group-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.group-card ul li {
+    padding: 7px 0;
+    border-bottom: 1px dotted var(--dark-shadow);
+    color: var(--text-color);
+    min-height: 1.2em;
+}
+
+.group-card ul li:last-child {
+    border-bottom: none;
+}
+
+.placeholder-name {
+    color: #aebacd; 
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+.fading-in-member {
+    opacity: 0;
+    animation: fadeInSlide 0.4s ease-out forwards;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Shuffling Animation Area */
+.hidden {
+    display: none !important;
+}
+
+#shuffling-area {
+    text-align: center;
+    padding: 30px 0;
+    margin-bottom: 20px;
+}
+
+#flying-students-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    min-height: 100px;
+    margin-top: 20px;
+    position: relative;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: inset 4px 4px 8px var(--dark-shadow), inset -4px -4px 8px var(--light-shadow);
+}
+
+.flying-student-block {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+    box-shadow: 0 4px 8px rgba(85, 172, 238, 0.4);
+    position: relative; 
+    opacity: 1;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.flying-student-block.fly-to-group {
+    opacity: 0;
+    transform: scale(0.5) translateY(100px);
+}
+
+.error-message {
+    color: var(--secondary-color);
+    font-weight: 600;
+    padding: 15px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    background-color: #f7e8e8;
+    text-align: center;
+    box-shadow: inset 2px 2px 4px var(--dark-shadow);
+}
+
+
+/* ========================================================================= */
+/* **** АДАПТИВНОСТЬ (МЕДИА-ЗАПРОСЫ) **** */
+/* ========================================================================= */
+
+/* 1. Планшеты и небольшие настольные ПК (Max width 992px) */
+@media (max-width: 992px) {
+    .container {
+        max-width: 90%;
+        padding: 30px;
+        border-radius: 20px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    /* Уменьшаем минимальную ширину элемента студента, чтобы поместилось больше */
+    .student-item {
+        min-width: 150px;
+    }
+}
+
+/* 2. Мобильные устройства (Max width 768px) */
+@media (max-width: 768px) {
+    body {
+        padding: 15px 10px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+
+    /* Карточки групп переходят в вертикальный режим */
+    .groups-container {
+        grid-template-columns: 1fr; 
+        gap: 20px;
+    }
+
+    /* Элементы списка студентов становятся шире */
+    .student-item {
+        min-width: 100%; /* Занимают всю ширину */
+        box-sizing: border-box; 
+    }
+    
+    /* Кнопки */
+    .btn {
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+    
+    /* Уменьшаем отступы в списке */
+    .list-container {
+        padding: 15px;
+    }
+}
+
+/* 3. Ультра-широкие мониторы (Min width 1600px) */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1200px; /* Позволяем контейнеру стать шире */
+        padding: 60px;
+    }
+    
+    .groups-container {
+        /* Добавляем поддержку 4 колонок при необходимости */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}

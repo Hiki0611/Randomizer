@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Group Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Class Random Group Generator</h1>
+
+        <section id="student-list-section">
+            <h2>Select Present Students (16 Total)</h2>
+            <div id="student-list" class="list-container">
+            </div>
+            <button id="generate-button" class="btn primary-btn">Generate Groups</button>
+        </section>
+
+        <section id="shuffling-area" class="hidden">
+            <h2>Shuffling Students...</h2>
+            <div id="flying-students-container">
+                </div>
+        </section>
+
+        <section id="groups-section" class="hidden">
+            <h2>Generated Groups</h2>
+            <div id="groups-output" class="groups-container">
+            </div>
+            <button id="reset-button" class="btn secondary-btn">Reset Selection</button>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

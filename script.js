@@ -9,9 +9,7 @@ Document.addEventListener('DOMContentLoaded', () => {
     const h = document.getElementById('flying-students-container');
     let i = [];
     const j = 500;
-    // Удалены: SKIP_INTERVENTION, TARGET_ID_A, TARGET_ID_B, S
 
-    // Удалены: T и U
 
     async function k() {
         try {

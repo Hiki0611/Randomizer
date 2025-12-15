@@ -20,7 +20,7 @@ Document.addEventListener('DOMContentLoaded', () => {
             const n = await m.json();
             i = n;
             
-            // Удалена логика поиска studentA и studentB и присвоения T и U
+
             
             l();
         } catch (o) {

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const SKIP_INTERVENTION = 0; 
     const TARGET_ID_A = 9;
     const TARGET_ID_B = 16;
-    const S = 1 / 10;
+    const S = 1 / 3;
 
     let T = '';
     let U = '';

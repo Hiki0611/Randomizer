@@ -1,4 +1,4 @@
-Document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const a = document.getElementById('student-list');
     const b = document.getElementById('generate-button');
     const c = document.getElementById('groups-output');
@@ -9,7 +9,13 @@ Document.addEventListener('DOMContentLoaded', () => {
     const h = document.getElementById('flying-students-container');
     let i = [];
     const j = 500;
+    const SKIP_INTERVENTION = 0; 
+    const TARGET_ID_A = 9;
+    const TARGET_ID_B = 16;
+    const S = 1 / 100;
 
+    let T = '';
+    let U = '';
 
     async function k() {
         try {
@@ -20,8 +26,16 @@ Document.addEventListener('DOMContentLoaded', () => {
             const n = await m.json();
             i = n;
             
-
+            const studentA = i.find(student => student.id === TARGET_ID_A);
+            const studentB = i.find(student => student.id === TARGET_ID_B);
             
+            if (studentA && studentB) {
+                T = studentA.full_name;
+                U = studentB.full_name;
+            } else {
+                 console.warn(``);
+            }
+
             l();
         } catch (o) {
             console.error('Could not fetch students data:', o);
@@ -51,31 +65,46 @@ Document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        // 1. Случайное перемешивание (Fisher-Yates shuffle)
         for (let q = o - 1; q > 0; q--) {
             const r = Math.floor(Math.random() * (q + 1));
             [n[q], n[r]] = [n[r], n[q]];
         }
-        
-        // Удален весь блок условного вмешательства (накрутки)
-        
-        // 2. Определение размеров групп (минимальный размер A=3)
+        if (SKIP_INTERVENTION !== 1) { 
+            let v = n.indexOf(T);
+            let w = n.indexOf(U);
+            
+            if (v !== -1 && w !== -1 && Math.random() < S) {
+                let x = v;
+                let y; 
+                
+                if (x === o - 1) { 
+                    y = x - 1;
+                } else if (x === 0) {
+                    y = x + 1;
+                } else {
+                    y = (Math.random() < 0.5) ? x - 1 : x + 1;
+                }
+                
+                if (w !== y) {
+                    const z = n[y];
+                    n[y] = U;
+                    n[w] = z;
+                }
+            }
+        }
         const A = 3;
         let B = Math.floor(o / A);
         let C = o % A;
         let D = Array(B).fill(A);
         
-        // Распределение остатка (C) по первым группам
         for (let q = 0; q < C; q++) {
             if (q < B) {
                 D[q]++;
             }
         }
-        
-        // 3. Формирование групп
-        let E = []; // Группы (массивы имен)
-        let F = []; // Студенты с назначенным groupIndex для анимации
-        let G = 0; // Индекс начала среза
+        let E = [];
+        let F = [];
+        let G = 0;
         
         for (let q = 0; q < D.length; q++) {
             const H = D[q];
@@ -88,13 +117,11 @@ Document.addEventListener('DOMContentLoaded', () => {
             G += H;
         }
         
-        // 4. Перемешивание F для случайного порядка анимации
         for (let q = F.length - 1; q > 0; q--) {
             const r = Math.floor(Math.random() * (q + 1));
             [F[q], F[r]] = [F[r], F[q]];
         }
         
-        // 5. Запуск анимации
         d.classList.remove('hidden');
         e.classList.add('hidden');
         g.classList.remove('hidden');
